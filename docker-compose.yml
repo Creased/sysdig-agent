@@ -1,0 +1,20 @@
+version: '3'
+services:
+    agent:
+        image: sysdig/agent:latest
+        container_name: sysdig-agent
+        restart: always
+        environment:
+            ACCESS_KEY: ${ACCESS_KEY}
+            TAGS: ${TAGS}
+        network_mode: host
+        privileged: true
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /dev:/host/dev
+            - /proc:/host/proc:ro
+            - /boot:/host/boot:ro
+            - /lib/modules:/host/lib/modules:ro
+            - /usr:/host/usr:ro
+        shm_size: 350m
+networks: {}
